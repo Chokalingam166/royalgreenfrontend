@@ -85,7 +85,7 @@ const Checkout = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/payments/razorpay/order', {
+      const res = await axios.post('/api/payments/razorpay/order', {
         amount: total
       });
 
