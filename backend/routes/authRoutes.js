@@ -7,7 +7,8 @@ const jwt = require("jsonwebtoken");
 // REGISTER
 router.post("/register", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const email = req.body.email?.trim().toLowerCase();
+    const { password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ msg: "Email and password required" });
@@ -23,8 +24,18 @@ router.post("/register", async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "secretkey", { expiresIn: "7d" });
 
-    res.status(201).json({ msg: "Registered successfully", token });
+    res.status(201).json({
+      msg: "Registered successfully",
+      token,
+      user: { id: user._id, email: user.email }
+    });
   } catch (err) {
+    console.error("Register error:", err);
+
+    if (err.code === 11000) {
+      return res.status(400).json({ msg: "User already exists" });
+    }
+
     res.status(500).json({ msg: "Server error" });
   }
 });
@@ -32,7 +43,8 @@ router.post("/register", async (req, res) => {
 // LOGIN
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const email = req.body.email?.trim().toLowerCase();
+    const { password } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ msg: "Invalid credentials" });
@@ -44,6 +56,7 @@ router.post("/login", async (req, res) => {
 
     res.json({ msg: "Login success", token, user: { id: user._id, email: user.email } });
   } catch (err) {
+    console.error("Login error:", err);
     res.status(500).json({ msg: "Server error" });
   }
 });
