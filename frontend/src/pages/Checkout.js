@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import axios from 'axios';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { apiUrl } from '../config/api';
 import '../styles/App.css';
 
 const initialAddress = {
@@ -85,7 +86,7 @@ const Checkout = () => {
     }
 
     try {
-      const res = await axios.post('/api/payments/razorpay/order', {
+      const res = await axios.post(apiUrl('/api/payments/razorpay/order'), {
         amount: total
       });
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { apiUrl } from '../config/api';
 import '../styles/App.css';
 
 const Login = () => {
@@ -18,7 +19,7 @@ const Login = () => {
     setError('');
 
     try {
-      const res = await axios.post('/api/auth/login', {
+      const res = await axios.post(apiUrl('/api/auth/login'), {
         email,
         password
       });
