@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import axios from 'axios';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import '../App.css';
+import '../styles/App.css';
 
 const initialAddress = {
   name: '',

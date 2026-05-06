@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import '../App.css';
+import '../styles/App.css';
 
 const fruits = [
   { id: 1, name: 'Apple', price: 1.2, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF4W5EKllFJpqSRUlJvSuRJodXMv1lZCmTfA&s' },

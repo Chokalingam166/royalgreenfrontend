@@ -6,7 +6,7 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Checkout from './pages/Checkout';
 import PaymentResult from './pages/PaymentResult';
-import './App.css';
+import './styles/App.css';
 
 function App() {
   const { token } = useAuth();
