@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
   credentials: true
 }));
 
@@ -17,6 +17,10 @@ mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/royalgreen"
   .catch(err => console.log("❌ MongoDB Error:", err));
 
 // Routes
+app.get("/", (req, res) => {
+  res.send("Royal Green Backend API is running");
+});
+
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/payments", require("./routes/paymentRoutes"));
 
